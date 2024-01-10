@@ -6,6 +6,8 @@ public class RotateBigCube : MonoBehaviour
 {
     private Vector2 firstPressPos, secondPressPos, currentSwipe;
     [SerializeField] GameObject target;
+    [SerializeField] float rotationSpeed = 0.1f;
+    [SerializeField] Camera cam;
 
     float speed = 400f;
 
@@ -19,10 +21,27 @@ public class RotateBigCube : MonoBehaviour
     void Update()
     {
         Swipe();
-        if (transform.rotation != target.transform.rotation)
+        Drag();
+    }
+
+    void Drag()
+    {
+        if(Input.GetMouseButton(1)) 
+        {   
+            float rotX = Input.GetAxis("Mouse X") * rotationSpeed;
+            float rotY = Input.GetAxis("Mouse Y") * rotationSpeed;
+            Vector3 right = Vector3.Cross(cam.transform.up, transform.position - cam.transform.position);
+            Vector3 up = Vector3.Cross(transform.position - cam.transform.position, right);
+            transform.rotation = Quaternion.AngleAxis(-rotX, up) * transform.rotation;
+            transform.rotation = Quaternion.AngleAxis(rotY, right) * transform.rotation;
+        }
+        else 
         {
-            var step = speed * Time.deltaTime;
-            transform.rotation = Quaternion.RotateTowards (transform.rotation, target.transform.rotation, step);
+            if (transform.rotation != target.transform.rotation)
+            {
+                var step = speed * Time.deltaTime;
+                transform.rotation = Quaternion.RotateTowards (transform.rotation, target.transform.rotation, step);
+            }
         }
     }
 
