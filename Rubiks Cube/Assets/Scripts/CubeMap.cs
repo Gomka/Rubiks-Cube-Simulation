@@ -34,10 +34,12 @@ public class CubeMap : MonoBehaviour
     }
 
     void UpdateMap(List<GameObject> face, Transform side) 
-    {
+    {   
         int i = 0;
         foreach (Transform map in side) 
         {
+            if(map.name[0] == 'T' || map.name[0] == 'B' || face.Count == 0) break;
+
             switch (face[i].name[0])
             {
                 case 'U': map.GetComponent<Image>().color = Color.white; break;
@@ -47,7 +49,8 @@ public class CubeMap : MonoBehaviour
                 case 'B': map.GetComponent<Image>().color = new Color(0, 0.33f, 1, 1); break;
                 case 'D': map.GetComponent<Image>().color = new Color(0.95f, 1, 0, 1); break;
                 default: break;
-            }
+            } 
+
             i++;
         }
     }

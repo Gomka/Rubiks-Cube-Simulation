@@ -70,7 +70,7 @@ public class ReadCube : MonoBehaviour
         for(int y = 1; y > -2; y--) 
         {
             for (int x = -1; x < 2; x++)
-            {
+            {   
                 Vector3 startPos = new Vector3(rayTrasnform.position.x + x, rayTrasnform.position.y + y, rayTrasnform.position.z);
                 GameObject rayStart = Instantiate(emptyGO, startPos, Quaternion.identity, rayTrasnform);
                 rayStart.name = rayCount.ToString();
@@ -89,14 +89,14 @@ public class ReadCube : MonoBehaviour
 
         foreach(GameObject rayStart in rayStarts)
         {
-            Vector3 ray = tFront.transform.position;
+            Vector3 ray = rayTrasnform.transform.position;
             RaycastHit hit;
 
             if(Physics.Raycast(ray, rayTrasnform.forward, out hit, Mathf.Infinity, layerMask))
             {
                 Debug.DrawRay(ray, rayTrasnform.forward * hit.distance, Color.yellow);
                 facesHit.Add(hit.collider.gameObject);
-                Debug.Log("Hit!" + ray);
+                //Debug.Log("Hit! " + hit.transform.name);
             }
             else 
             {
