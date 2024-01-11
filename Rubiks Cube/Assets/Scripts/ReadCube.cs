@@ -41,8 +41,8 @@ public class ReadCube : MonoBehaviour
         cubeState.left = ReadFace(leftRays, tLeft);
         cubeState.front = ReadFace(frontRays, tFront);
         cubeState.right = ReadFace(rightRays, tRight);
-        cubeState.down = ReadFace(downRays, tDown);
         cubeState.back = ReadFace(backRays, tBack);
+        cubeState.down = ReadFace(downRays, tDown);
 
         cubeMap.Set();
     }
@@ -50,10 +50,10 @@ public class ReadCube : MonoBehaviour
     void SetRayTransforms() 
     {
         upRays = BuildRays(tUp, new Vector3(90, 90, 0));
-        leftRays = BuildRays(tLeft, new Vector3(0, 180, 0));
-        frontRays = BuildRays(tFront, new Vector3(90, 90, 0));
-        rightRays = BuildRays(tRight, new Vector3(0, 0, 0));
-        backRays = BuildRays(tBack, new Vector3(0, 270, 0));
+        leftRays = BuildRays(tLeft, new Vector3(0, 0, 0));
+        frontRays = BuildRays(tFront, new Vector3(180, 90, 0));
+        rightRays = BuildRays(tRight, new Vector3(0, 180, 0));
+        backRays = BuildRays(tBack, new Vector3(0, 90, 0));
         downRays = BuildRays(tDown, new Vector3(270, 90, 0));
     }
 
@@ -71,7 +71,7 @@ public class ReadCube : MonoBehaviour
         {
             for (int x = -1; x < 2; x++)
             {
-                Vector3 startPos = new Vector3(rayTrasnform.localPosition.x + x, rayTrasnform.localPosition.y + y, rayTrasnform.localPosition.z);
+                Vector3 startPos = new Vector3(rayTrasnform.position.x + x, rayTrasnform.position.y + y, rayTrasnform.position.z);
                 GameObject rayStart = Instantiate(emptyGO, startPos, Quaternion.identity, rayTrasnform);
                 rayStart.name = rayCount.ToString();
                 rays.Add(rayStart);
@@ -96,6 +96,7 @@ public class ReadCube : MonoBehaviour
             {
                 Debug.DrawRay(ray, rayTrasnform.forward * hit.distance, Color.yellow);
                 facesHit.Add(hit.collider.gameObject);
+                Debug.Log("Hit!" + ray);
             }
             else 
             {
