@@ -9,7 +9,7 @@ public class RotateBigCube : MonoBehaviour
     [SerializeField] float rotationSpeed = 0.1f;
     [SerializeField] Camera cam;
 
-    float speed = 400f;
+    float speed = 800f;
 
     // Start is called before the first frame update
     void Start()
