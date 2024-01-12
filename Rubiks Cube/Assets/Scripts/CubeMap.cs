@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,8 @@ public class CubeMap : MonoBehaviour
         int i = 0;
         foreach (Transform map in side) 
         {
-            if(map.name[0] == 'T' || map.name[0] == 'B' || face.Count == 0) break;
+
+            if(map.name[0] == 'T' || map.name[0] == 'B' || face.Count < 9) break;
 
             switch (face[i].name[0])
             {

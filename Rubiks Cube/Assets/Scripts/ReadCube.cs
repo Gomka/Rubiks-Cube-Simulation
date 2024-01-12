@@ -71,7 +71,7 @@ public class ReadCube : MonoBehaviour
         {
             for (int x = -1; x < 2; x++)
             {   
-                Vector3 startPos = new Vector3(rayTrasnform.position.x + x, rayTrasnform.position.y + y, rayTrasnform.position.z);
+                Vector3 startPos = new Vector3(rayTrasnform.localPosition.x + x, rayTrasnform.localPosition.y + y, rayTrasnform.localPosition.z);
                 GameObject rayStart = Instantiate(emptyGO, startPos, Quaternion.identity, rayTrasnform);
                 rayStart.name = rayCount.ToString();
                 rays.Add(rayStart);
@@ -89,7 +89,7 @@ public class ReadCube : MonoBehaviour
 
         foreach(GameObject rayStart in rayStarts)
         {
-            Vector3 ray = rayTrasnform.transform.position;
+            Vector3 ray = rayStart.transform.position;
             RaycastHit hit;
 
             if(Physics.Raycast(ray, rayTrasnform.forward, out hit, Mathf.Infinity, layerMask))
