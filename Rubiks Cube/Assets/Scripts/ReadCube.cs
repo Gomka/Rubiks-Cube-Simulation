@@ -49,12 +49,12 @@ public class ReadCube : MonoBehaviour
 
     void SetRayTransforms() 
     {
-        upRays = BuildRays(tUp, new Vector3(90, 90, 0));
+        upRays = BuildRays(tUp, new Vector3(90, 90, 180));
         leftRays = BuildRays(tLeft, new Vector3(0, 0, 0));
-        frontRays = BuildRays(tFront, new Vector3(180, 90, 0));
+        frontRays = BuildRays(tFront, new Vector3(180, 90, 180));
         rightRays = BuildRays(tRight, new Vector3(0, 180, 0));
         backRays = BuildRays(tBack, new Vector3(0, 90, 0));
-        downRays = BuildRays(tDown, new Vector3(270, 90, 0));
+        downRays = BuildRays(tDown, new Vector3(270, 90, 180));
     }
 
     List<GameObject> BuildRays(Transform rayTrasnform, Vector3 direction) 
@@ -96,7 +96,6 @@ public class ReadCube : MonoBehaviour
             {
                 Debug.DrawRay(ray, rayTrasnform.forward * hit.distance, Color.yellow);
                 facesHit.Add(hit.collider.gameObject);
-                //Debug.Log("Hit! " + hit.transform.name);
             }
             else 
             {
