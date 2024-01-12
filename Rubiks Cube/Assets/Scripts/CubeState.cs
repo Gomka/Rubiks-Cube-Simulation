@@ -22,4 +22,22 @@ public class CubeState : MonoBehaviour
     {
         
     }
+
+    public void PickUp(List<GameObject> cubeSide)
+    {
+        foreach(GameObject face in cubeSide)
+        {
+            // Attach the cubie of each face
+            // to the parent of the 4th index (the center cubie)
+            // unless it's already the 4th index
+
+            if(face != cubeSide[4])
+            {
+                face.transform.parent.transform.parent = cubeSide[4].transform.parent;
+            }
+
+            // Start the side rotation logic
+            cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
+        }
+    }
 }
