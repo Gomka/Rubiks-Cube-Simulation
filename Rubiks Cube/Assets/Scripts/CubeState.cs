@@ -10,6 +10,8 @@ public class CubeState : MonoBehaviour
     public List<GameObject> right = new List<GameObject>();
     public List<GameObject> back = new List<GameObject>();
     public List<GameObject> down = new List<GameObject>();
+
+    public static bool isTurning = false, started = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,8 @@ public class CubeState : MonoBehaviour
 
     public void PickUp(List<GameObject> cubeSide)
     {
+        if(isTurning && !started) return;
+        isTurning = true;
         foreach(GameObject face in cubeSide)
         {
             // Attach the cubie of each face
@@ -35,9 +39,18 @@ public class CubeState : MonoBehaviour
             {
                 face.transform.parent.transform.parent = cubeSide[4].transform.parent;
             }
+        }
+    }
 
-            // Start the side rotation logic
-            cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
+    public void PutDown(List<GameObject> cubies, Transform pivot)
+    {
+        //if(isTurning) return;
+        foreach(GameObject cubie in cubies)
+        {
+            if(cubie != cubies[4])
+            {
+                cubie.transform.parent.transform.parent = pivot;
+            }
         }
     }
 }

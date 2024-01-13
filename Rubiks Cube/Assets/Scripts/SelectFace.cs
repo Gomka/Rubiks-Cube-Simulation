@@ -23,7 +23,7 @@ public class SelectFace : MonoBehaviour
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out hit, 100.0f, layerMask))
+            if(Physics.Raycast(ray, out hit, 100.0f, layerMask) && !CubeState.isTurning)
             {
                 GameObject face = hit.collider.gameObject;
 
@@ -39,7 +39,12 @@ public class SelectFace : MonoBehaviour
 
                 foreach (List<GameObject> cubeSide in cubeSides)
                 {
-                    cubeState.PickUp(cubeSide);
+                    if(cubeSide.Contains(face)) 
+                    {
+                        cubeState.PickUp(cubeSide);
+                        // Start the side rotation logic
+                        cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
+                    }
                 }
             }
         }
