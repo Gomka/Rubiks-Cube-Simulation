@@ -8,13 +8,15 @@ public class RotateBigCube : MonoBehaviour
     [SerializeField] GameObject target;
     [SerializeField] float rotationSpeed = 0.1f;
     [SerializeField] Camera cam;
+    ReadCube readCube;
 
     float speed = 800f;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        readCube = FindObjectOfType<ReadCube>();
     }
 
     // Update is called once per frame
@@ -41,6 +43,7 @@ public class RotateBigCube : MonoBehaviour
             {
                 var step = speed * Time.deltaTime;
                 transform.rotation = Quaternion.RotateTowards (transform.rotation, target.transform.rotation, step);
+                readCube.ReadState();
             }
         }
     }
