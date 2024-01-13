@@ -7,8 +7,8 @@ public class Automate : MonoBehaviour
     public static List<string> moveList = new List<string>(){};
     private readonly List<string> allMoves = new List<string>()
     {
-        "U", "L", "F", "R", "B", "D", 
-        "U'", "L'", "F'", "R'", "B'", "D'"
+        "U", "U'", "L", "L'", "F", "F'", 
+        "R", "R'", "B", "B'", "D", "D'"
     };
     private CubeState cubeState;
     private ReadCube readCube;
@@ -30,19 +30,26 @@ public class Automate : MonoBehaviour
     }
 
     public void Shuffle()
-    {
+    {   
+        int randomMove = -1, move;
         List<string> moves = new List<string>();
         int shuffleLength = Random.Range(20, 30);
-        for (int i = 0; i < shuffleLength; i++)
+        for (int i = 0; i < shuffleLength;)
         {
-            int randomMove = Random.Range(0, allMoves.Count);
-            moves.Add(allMoves[randomMove]);
+            move = Random.Range(0, allMoves.Count);
+            if(Mathf.Abs(randomMove - move) != 1)
+            {
+                randomMove = move;
+                moves.Add(allMoves[randomMove]);
+                i++;
+            }
         }
         moveList = moves;
     }
 
-    void DoMove(string move)
+    public void DoMove(string move)
     {
+        if(CubeState.isTurning) return;
         readCube.ReadState();
         CubeState.isTurning = true;
         switch (move)

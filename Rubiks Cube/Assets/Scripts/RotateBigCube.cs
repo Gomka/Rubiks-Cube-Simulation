@@ -57,6 +57,9 @@ public class RotateBigCube : MonoBehaviour
         if(Input.GetMouseButtonUp(1))
         {
             secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 difference = firstPressPos.normalized - secondPressPos.normalized;
+
+            if(difference.magnitude < 0.01f) return;
             
             currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
             currentSwipe.Normalize();
