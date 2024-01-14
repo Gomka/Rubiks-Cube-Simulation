@@ -28,6 +28,86 @@ public class Automate : MonoBehaviour
             DoMove(moveList[0]);
             moveList.Remove(moveList[0]);
         }
+
+        // Keyboard Inputs
+        if(!CubeState.isTurning)
+        {
+            if(Input.GetKeyDown(KeyCode.U))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("U'");
+                } else
+                {
+                    DoMove("U");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.L))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("L'");
+                } else
+                {
+                    DoMove("L");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("F'");
+                } else
+                {
+                    DoMove("F");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("R'");
+                } else
+                {
+                    DoMove("R");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.B))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("B'");
+                } else
+                {
+                    DoMove("B");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.D))
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {
+                    DoMove("D'");
+                } else
+                {
+                    DoMove("D");
+                }
+            }
+            if(Input.GetKeyDown(KeyCode.Y))
+            {
+
+                DoMove("F");
+            }
+            if(Input.GetKeyDown(KeyCode.H))
+            {
+
+                DoMove("R");
+            }
+            if(Input.GetKeyDown(KeyCode.J))
+            {
+
+                DoMove("D");
+            }
+        }
     }
 
     public void Shuffle()

@@ -7,7 +7,7 @@ public class SolveTwoPhase : MonoBehaviour
 {
     private ReadCube readCube;
     private CubeState cubeState;
-    private bool firstTime = true;
+    private bool doOnce = true;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,11 @@ public class SolveTwoPhase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(CubeState.started && doOnce)
+        {
+            doOnce = false;
+            Solver();
+        }
     }
 
     public void Solver()
@@ -30,28 +34,25 @@ public class SolveTwoPhase : MonoBehaviour
         // First we get the cubeState, we apply the algorythm and we convert the solved moves to a list of moves
 
         string moveString = cubeState.GetStateString();
-        Debug.Log(moveString);
 
         string info = "";
         string solution = "";
-        
-        if(firstTime) 
-        {
-            solution = SearchRunTime.solution(moveString, out info, buildTables: true);
-            firstTime = false;
-        } else 
-        {
-            solution = Search.solution(moveString, out info);
-        }
+
+        //solution = SearchRunTime.solution(moveString, out info, buildTables: true);
+
+        solution = Search.solution(moveString, out info);
 
         List<string> solutionList = StringToList(solution);
         Debug.Log("Solution: " + solution);
-        Automate.moveList = solutionList;
-        Debug.Log(info);
+
+        if(solution.Length != 0 && solution[0]!= 'E')
+        {
+            Automate.moveList = solutionList;
+        }        
     }
 
     List<string> StringToList(string solution)
     {
-        return new List<string>(solution.Split(new string[]{" "}, System.StringSplitOptions.RemoveEmptyEntries));
+        return new List<string>(solution.Split(new string[] { " " }, System.StringSplitOptions.RemoveEmptyEntries));
     }
 }

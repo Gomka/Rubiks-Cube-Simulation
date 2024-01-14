@@ -59,14 +59,16 @@ public class CubeState : MonoBehaviour
         string sideString = "";
         foreach (GameObject face in side)
         {
-            sideString += face.name[0];
+            sideString += face.name[0].ToString();
         }
         return sideString;
     }
 
-    public string GetStateString()
+    public string GetStateString() // W(U) R(R) G(F) Y(D) O(L) B(B)
     {
         string stateString = "";
+
+
         stateString += GetSideString(up);
         stateString += GetSideString(right);
         stateString += GetSideString(front);
