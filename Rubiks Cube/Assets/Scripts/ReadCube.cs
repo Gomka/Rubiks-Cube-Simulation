@@ -13,6 +13,8 @@ public class ReadCube : MonoBehaviour
 
     private ChronometerController chrono;
 
+    private CanvasController canvasController;
+
     private List<GameObject> upRays = new List<GameObject>();
     private List<GameObject> leftRays = new List<GameObject>();
     private List<GameObject> frontRays = new List<GameObject>();
@@ -29,6 +31,7 @@ public class ReadCube : MonoBehaviour
         ReadState();
         CubeState.started = true;
         chrono = FindObjectOfType<ChronometerController>();
+        canvasController = FindObjectOfType<CanvasController>();
     }
 
     // Update is called once per frame
@@ -55,7 +58,7 @@ public class ReadCube : MonoBehaviour
         {
             // trigger solved state
             float time = chrono.StopChrono();
-            Debug.Log("Solved in: " + time);
+            canvasController.CubeSolved(time);
         }
     }
 
