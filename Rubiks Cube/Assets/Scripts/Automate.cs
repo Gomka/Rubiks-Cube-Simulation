@@ -8,7 +8,8 @@ public class Automate : MonoBehaviour
     private readonly List<string> allMoves = new List<string>()
     {
         "U", "U'", "L", "L'", "F", "F'", 
-        "R", "R'", "B", "B'", "D", "D'"
+        "R", "R'", "B", "B'", "D", "D'",
+        "U2", "L2", "F2", "R2", "B2", "D2"
     };
     private CubeState cubeState;
     private ReadCube readCube;
@@ -36,7 +37,7 @@ public class Automate : MonoBehaviour
         int shuffleLength = Random.Range(20, 30);
         for (int i = 0; i < shuffleLength;)
         {
-            move = Random.Range(0, allMoves.Count);
+            move = Random.Range(0, allMoves.Count - 6);
             if(Mathf.Abs(randomMove - move) != 1)
             {
                 randomMove = move;
@@ -66,6 +67,12 @@ public class Automate : MonoBehaviour
             case "B'": RotateSide(cubeState.back, 90); break;
             case "D": RotateSide(cubeState.down, -90); break;
             case "D'": RotateSide(cubeState.down, 90); break;
+            case "U2": RotateSide(cubeState.up, -180); break;
+            case "L2": RotateSide(cubeState.left, -180); break;
+            case "F2": RotateSide(cubeState.front, -180); break;
+            case "R2": RotateSide(cubeState.right, -180); break;
+            case "B2": RotateSide(cubeState.back, -180); break;
+            case "D2": RotateSide(cubeState.down, -90); break;
             default: break;
         }
     }

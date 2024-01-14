@@ -19,10 +19,10 @@ public class PivotRotation : MonoBehaviour
         cubeState = FindObjectOfType<CubeState>();
     }
 
-    // Update is called once per frame
-    void Update()
+    // Late Update is called once per frame at the end of Update
+    void LateUpdate()
     {
-        if(dragging)
+        if(dragging && !autoRotating)
         {
             SpinSide(activeSide);
             if(Input.GetMouseButtonUp(0))

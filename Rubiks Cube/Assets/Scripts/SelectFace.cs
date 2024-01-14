@@ -43,7 +43,7 @@ public class SelectFace : MonoBehaviour
                     {
                         cubeState.PickUp(cubeSide);
                         // Start the side rotation logic
-                        Debug.Log(cubeSide[4].transform.name);
+                        // Debug.Log(cubeSide[4].transform.name);
                         cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
                     }
                 }
