@@ -10,10 +10,11 @@ public class ChronometerController : MonoBehaviour
     bool isActive = false;
     float currentTime = 0f;
     public TMP_Text stopwatchText;
+    private ReadCube readCube;
     // Start is called before the first frame update
     void Start()
     {
-        
+        readCube = FindObjectOfType<ReadCube>();
     }
 
     // Update is called once per frame

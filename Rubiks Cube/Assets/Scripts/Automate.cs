@@ -13,11 +13,13 @@ public class Automate : MonoBehaviour
     };
     private CubeState cubeState;
     private ReadCube readCube;
+    private ChronometerController chrono;
     // Start is called before the first frame update
     void Start()
     {
         cubeState = FindObjectOfType<CubeState>();
         readCube = FindObjectOfType<ReadCube>();
+        chrono = FindObjectOfType<ChronometerController>();
     }
 
     // Update is called once per frame
@@ -27,6 +29,12 @@ public class Automate : MonoBehaviour
         {
             DoMove(moveList[0]);
             moveList.Remove(moveList[0]);
+
+            if(moveList.Count == 0) 
+            {
+                CubeState.scrambled = true;
+                chrono.StartChrono();
+            }
         }
 
         // Keyboard Inputs

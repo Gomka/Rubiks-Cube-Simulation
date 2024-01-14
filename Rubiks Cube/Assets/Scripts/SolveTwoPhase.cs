@@ -43,7 +43,6 @@ public class SolveTwoPhase : MonoBehaviour
         solution = Search.solution(moveString, out info);
 
         List<string> solutionList = StringToList(solution);
-        Debug.Log("Solution: " + solution);
 
         if(solution.Length != 0 && solution[0]!= 'E')
         {

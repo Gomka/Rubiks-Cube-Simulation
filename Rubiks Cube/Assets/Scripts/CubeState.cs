@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CubeState : MonoBehaviour
@@ -11,7 +12,7 @@ public class CubeState : MonoBehaviour
     public List<GameObject> back = new List<GameObject>();
     public List<GameObject> down = new List<GameObject>();
 
-    public static bool isTurning = false, started = false;
+    public static bool isTurning = false, started = false, scrambled = false;
     
     // Start is called before the first frame update
     void Start()
@@ -64,9 +65,10 @@ public class CubeState : MonoBehaviour
         return sideString;
     }
 
-    public string GetStateString() // W(U) R(R) G(F) Y(D) O(L) B(B)
+    public string GetStateString()
     {
         string stateString = "";
+        char ch_up, ch_right, ch_front, ch_down, ch_left, ch_back;
 
         stateString += GetSideString(up);
         stateString += GetSideString(right);
@@ -74,6 +76,27 @@ public class CubeState : MonoBehaviour
         stateString += GetSideString(down);
         stateString += GetSideString(left);
         stateString += GetSideString(back);
+
+        ch_up = up[4].name[0];
+        ch_right = right[4].name[0];
+        ch_front = front[4].name[0];
+        ch_down = down[4].name[0];
+        ch_left = left[4].name[0];
+        ch_back = back[4].name[0];
+
+        stateString = stateString.Replace(ch_up, '1');
+        stateString = stateString.Replace(ch_left, '2');
+        stateString = stateString.Replace(ch_front, '3');
+        stateString = stateString.Replace(ch_right, '4');
+        stateString = stateString.Replace(ch_back, '5');
+        stateString = stateString.Replace(ch_down, '6');
+
+        stateString = stateString.Replace('1', 'U');
+        stateString = stateString.Replace('2', 'L');
+        stateString = stateString.Replace('3', 'F');
+        stateString = stateString.Replace('4', 'R');
+        stateString = stateString.Replace('5', 'B');
+        stateString = stateString.Replace('6', 'D');
 
         return stateString;
     }

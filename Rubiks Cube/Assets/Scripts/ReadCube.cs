@@ -11,6 +11,8 @@ public class ReadCube : MonoBehaviour
     CubeMap cubeMap;
     public GameObject emptyGO;
 
+    private ChronometerController chrono;
+
     private List<GameObject> upRays = new List<GameObject>();
     private List<GameObject> leftRays = new List<GameObject>();
     private List<GameObject> frontRays = new List<GameObject>();
@@ -26,6 +28,7 @@ public class ReadCube : MonoBehaviour
         cubeMap = FindObjectOfType<CubeMap>();
         ReadState();
         CubeState.started = true;
+        chrono = FindObjectOfType<ChronometerController>();
     }
 
     // Update is called once per frame
@@ -47,6 +50,13 @@ public class ReadCube : MonoBehaviour
         cubeState.down = ReadFace(downRays, tDown);
 
         cubeMap.Set();
+
+        if(CheckSolved())
+        {
+            // trigger solved state
+            float time = chrono.StopChrono();
+            Debug.Log("Solved in: " + time);
+        }
     }
 
     void SetRayTransforms() 
@@ -106,5 +116,34 @@ public class ReadCube : MonoBehaviour
         }
 
         return facesHit;
+    }
+
+    public bool CheckSolved() 
+    {   
+        if(!CubeState.scrambled) return false;
+
+        foreach (GameObject face in cubeState.up)
+        {
+            if(face.name != cubeState.up[4].name) return false;
+        }
+        foreach (GameObject face in cubeState.left)
+        {
+            if(face.name != cubeState.left[4].name) return false;
+        }
+        foreach (GameObject face in cubeState.front)
+        {
+            if(face.name != cubeState.front[4].name) return false;
+        }
+        foreach (GameObject face in cubeState.right)
+        {
+            if(face.name != cubeState.right[4].name) return false;
+        }
+        foreach (GameObject face in cubeState.back)
+        {
+            if(face.name != cubeState.back[4].name) return false;
+        }
+        
+        CubeState.scrambled = false;
+        return true;
     }
 }
