@@ -139,8 +139,8 @@ public class Automate : MonoBehaviour
     public void DoMove(string move)
     {
         if(CubeState.isTurning) return;
-        readCube.ReadState();
         CubeState.isTurning = true;
+        readCube.ReadState();
         switch (move)
         {
             case "U": RotateSide(cubeState.up, -90); break;
@@ -168,9 +168,15 @@ public class Automate : MonoBehaviour
     void RotateSide(List<GameObject> side, float angle)
     {
         //Debug.Log(side.Count);
-        if(side == null) return;
+        //if(side == null) return;
 
         PivotRotation pr = side[4].transform.parent.GetComponent<PivotRotation>();
+        Debug.Log(pr);
+        if (pr == null)
+        {
+            CubeState.isTurning = false;
+            return;
+        }
         pr.StartAutoRotate(side, angle);
     }
 }
