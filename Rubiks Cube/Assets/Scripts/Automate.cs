@@ -167,11 +167,8 @@ public class Automate : MonoBehaviour
 
     void RotateSide(List<GameObject> side, float angle)
     {
-        //Debug.Log(side.Count);
-        //if(side == null) return;
-
         PivotRotation pr = side[4].transform.parent.GetComponent<PivotRotation>();
-        Debug.Log(pr);
+
         if (pr == null)
         {
             CubeState.isTurning = false;
