@@ -28,7 +28,9 @@ public class RotateBigCube : MonoBehaviour
 
     void Drag()
     {
-        if(Input.GetMouseButton(1)) 
+        if (CubeState.isTurning) return;
+
+        if (Input.GetMouseButton(1)) 
         {   
             float rotX = Input.GetAxis("Mouse X") * rotationSpeed;
             float rotY = Input.GetAxis("Mouse Y") * rotationSpeed;
@@ -50,7 +52,9 @@ public class RotateBigCube : MonoBehaviour
 
     void Swipe() 
     {
-        if(Input.GetMouseButtonDown(1))
+        if (CubeState.isTurning) return;
+
+        if (Input.GetMouseButtonDown(1))
         {
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
