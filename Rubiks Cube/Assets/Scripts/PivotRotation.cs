@@ -48,11 +48,11 @@ public class PivotRotation : MonoBehaviour
         }
         if(side[4].transform.name[0] == 'L')
         {
-            rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
+            rotation.z = (mouseOffset.x - mouseOffset.y) * sensitivity * -1;
         }
         if(side[4].transform.name[0] == 'F')
         {
-            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.x = (mouseOffset.x - mouseOffset.y) * sensitivity * 1;
         }
         if(side[4].transform.name[0] == 'R')
         {
@@ -60,11 +60,11 @@ public class PivotRotation : MonoBehaviour
         }
         if(side[4].transform.name[0] == 'B')
         {
-            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
+            rotation.x = (mouseOffset.x - mouseOffset.y) * sensitivity * -1;
         }
         if(side[4].transform.name[0] == 'D')
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.y = (- mouseOffset.x + mouseOffset.y) * sensitivity * 1;
         }        
 
         transform.Rotate(rotation, Space.Self);
